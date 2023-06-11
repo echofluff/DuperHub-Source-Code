@@ -1,1 +1,967 @@
--- currently cleaning up the script so it's ready for release
+-- using localplayer variable 15 times>
+
+local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
+
+local GUI = Mercury:Create{
+    Name = "DuperHub | 2.0",
+    Size = UDim2.fromOffset(670, 400),
+    Theme = Mercury.Themes.Rust,
+    Link = "duperhub-uwu.com"
+}
+
+GUI:Credit{
+	Name = "echofluwuff",
+	Description = "Main Dev",
+	Discord = "echofluff#9831"
+}
+
+GUI:Credit{
+	Name = "loldontbedum",
+	Description = "Helps Script",
+	Discord = "d'ad#5077d'ad#5077"
+}
+
+GUI:Credit{
+	Name = "Val",
+	Description = "Tester / Head-Support",
+	Discord = "ValWasTaken#6490"
+}
+
+GUI:Credit{
+	Name = "discord.gg/cTJJaFBS7S",
+	Description = "duperhub discord",
+	Discord = "https://discord.gg/cTJJaFBS7S"
+}
+
+-- tabs
+local Tab = GUI:Tab{
+	Name = "Main-Dupes",
+	Icon = "http://www.roblox.com/asset/?id=11570802781"
+}
+--
+Tab:Button{
+	Name = "Instant Max Time",
+	Description = "auto makes you max (9.223Qn)",
+	Callback = function()
+	    local player = game.Players.LocalPlayer
+	    local leaderstats = player.leaderstats
+	    local time = leaderstats.Time.Value
+	    if time < 0 then
+	    	Flux:Notification("error", "epic")
+	    else
+	    	time = tostring(time)
+	    	local args = {
+	    		[1] = time,
+	    		[2] = "deposit"
+	    	}
+    
+	    	game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+	    	wait(0.1)
+	    	local args = {
+	    		[1] = "9223372036854775000",
+	    		[2] = "withdraw"
+	    	}
+ 
+	    	game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+	    	Flux:Notification("You are now at max!!", "epic")
+	    end
+	end,
+}
+Tab:Button{
+	Name = "Basic Speed Dupe",
+	Description = "speed dupes you to about 9Qn",
+	Callback = function()
+	   local dupe = 50050000000000000
+	local player = game.Players.LocalPlayer
+	local time = player:WaitForChild("leaderstats").Time
+	local maxTime = 8850000000000000000
+	local stopped = false
+ 
+	game:GetService("UserInputService").InputBegan:Connect(function(inputObject)
+		if inputObject.KeyCode == Enum.KeyCode.Z then
+			stopped = true
+		end
+	end)
+ 
+	while true do
+		wait()
+ 
+		if time.Value > maxTime or stopped then
+			break 
+		end
+ 
+		local args = {
+			[1] = dupe,
+			[2] = "withdraw"
+		}
+		game:GetService("ReplicatedStorage").ATMRemoteEvent:FireServer(unpack(args))
+	end
+	end,
+}
+
+Tab:Button{
+	Name = "Give Everyone Time | 2.0",
+	Description = 'gives every player time at extreme speed (improved ver)',
+	Callback = function()
+        game:GetService("RunService").RenderStepped:Connect(function(step)
+		local randomPlayer = game.Players:GetPlayers()[math.random(#game.Players:GetPlayers())]
+		local args = {
+			[1] = randomPlayer,
+			[2] = 90000000000000000
+		}
+		game:GetService("ReplicatedStorage").SentMoney:FireServer(unpack(args))
+	end)
+ 
+ 
+	while wait(0) do
+		local player = game.Players.LocalPlayer
+		local leaderstats = player.leaderstats
+		local time = leaderstats.Time.Value
+		if time < -100 then
+			warn("Oh no that's not supposed to happen")
+		else
+			time = tostring(time)
+			local args = {
+				[1] = time,
+				[2] = "deposit"
+			}
+ 
+			game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+			wait()
+			local args = {
+				[1] = "90000000000000000",
+				[2] = "withdraw"
+			}
+ 
+			game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+			warn("Success")
+		end
+	end
+    end,
+}
+
+Tab:Button{
+	Name = "Give Everyone Time | 1.0",
+	Description = "gives every player time at extreme speed",
+	Callback = function() 
+	    game:GetService("RunService").RenderStepped:Connect(function(step)
+		local randomPlayer = game.Players:GetPlayers()[math.random(#game.Players:GetPlayers())]
+		local args = {
+			[1] = randomPlayer,
+			[2] = 90000000000000000
+		}
+		game:GetService("ReplicatedStorage").SentMoney:FireServer(unpack(args))
+	end)
+ 
+ 
+ 
+	getgenv().yes = true 
+ 
+ 
+	while yes do
+		wait(0.2) 
+		local dupe = 70000000000000000
+		local player = game.Players.LocalPlayer
+		local time = player:WaitForChild("leaderstats").Time
+		local maxTime = 7500000000000000000
+		local stopped = false
+ 
+		game:GetService("UserInputService").InputBegan:Connect(function(inputObject)
+			if inputObject.KeyCode == Enum.KeyCode.Z then
+				stopped = true
+			end
+		end)
+ 
+		while true do
+			wait()
+ 
+			if time.Value > maxTime or stopped then
+				break 
+			end
+ 
+			local args = {
+				[1] = dupe,
+				[2] = "withdraw"
+			}
+			game:GetService("ReplicatedStorage").ATMRemoteEvent:FireServer(unpack(args))
+		end
+	end
+	end,
+}
+
+Tab:Button{
+	Name = "Rejoin",
+	Description = "rejoin option so you can stop duping",
+	Callback = function() 
+	    local TeleportService = game:GetService("TeleportService")
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+ 
+	local Rejoin = coroutine.create(function()
+		local Success, ErrorMessage = pcall(function()
+			TeleportService:Teleport(game.PlaceId, LocalPlayer)
+		end)
+ 
+		if ErrorMessage and not Success then
+			warn(ErrorMessage)
+		end
+	end)
+ 
+	coroutine.resume(Rejoin)
+	end,
+}
+--
+local Tab2 = GUI:Tab{
+	Name = "Extra-Dupes",
+	Icon = "http://www.roblox.com/asset/?id=11570802781"
+}
+
+Tab2:Textbox{
+	Name = "Dupe Player",
+	Description = "dupes any player you choose",
+	Callback = function(OwORandom) 
+	    local targetPlayer = (OwORandom)
+
+	game:GetService("RunService").RenderStepped:Connect(function(step)
+		local player = game.Players:FindFirstChild(targetPlayer)
+		if player then
+			local args = {
+				[1] = player,
+				[2] = 90000000000000000
+			}
+			game:GetService("ReplicatedStorage").SentMoney:FireServer(unpack(args))
+
+		end
+	end)
+
+	getgenv().playerduped = true 
+
+
+	while playerduped do
+		wait(7) 
+		local dupe = 70000000000000000
+		local player = game.Players.LocalPlayer
+		local time = player:WaitForChild("leaderstats").Time
+		local maxTime = 7500000000000000000
+		local stopped = false
+
+		game:GetService("UserInputService").InputBegan:Connect(function(inputObject)
+			if inputObject.KeyCode == Enum.KeyCode.Z then
+				stopped = true
+			end
+		end)
+
+		while true do
+			wait()
+
+			if time.Value > maxTime or stopped then
+				break 
+			end
+
+			local args = {
+				[1] = dupe,
+				[2] = "withdraw"
+			}
+			game:GetService("ReplicatedStorage").ATMRemoteEvent:FireServer(unpack(args))
+		end
+	end
+	end,
+}
+
+Tab2:Textbox{
+	Name = "Custom Dupe",
+	Description = "dupes what you choose repeating (fast).",
+	Callback = function(Text) 
+	    local dupe = (Text)
+	local player = game.Players.LocalPlayer
+	local time = player:WaitForChild("leaderstats").Time
+	local maxTime = 8850000000000000000
+	local stopped = false
+
+	game:GetService("UserInputService").InputBegan:Connect(function(inputObject)
+		if inputObject.KeyCode == Enum.KeyCode.Z then
+			stopped = true
+		end
+	end)
+
+	while true do
+		wait()
+
+		if time.Value > maxTime or stopped then
+			break 
+		end
+
+		local args = {
+			[1] = dupe,
+			[2] = "withdraw"
+		}
+		game:GetService("ReplicatedStorage").ATMRemoteEvent:FireServer(unpack(args))
+	end
+	end,
+}
+
+Tab:Button{
+	Name = "Give Everyone Time | 3.0 Beta",
+	Description = 'Gets everyone to the exact max amount of time (9.223qn) BETA BUGGY',
+	Callback = function()
+	
+--
+
+game:GetService("RunService").RenderStepped:Connect(function(step)
+local randomPlayer = game.Players:GetPlayers()[math.random(#game.Players:GetPlayers())]
+local leaderstats = randomPlayer.leaderstats
+local time = leaderstats.Time.Value
+local amount = 9223372036854775000 - time
+if time < -100 then
+	Flux:Notification("error", "epic")
+else
+	local args = {
+        [1] = randomPlayer,
+        [2] = amount
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("SentMoney"):FireServer(unpack(args))
+end
+end)
+ 
+	while wait(1) do
+		local player = game.Players.LocalPlayer
+		local leaderstats = player.leaderstats
+		local time = leaderstats.Time.Value
+		if time < -100 then
+			warn("Oh no that's not supposed to happen")
+		else
+			time = tostring(time)
+			local args = {
+				[1] = time,
+				[2] = "deposit"
+			}
+ 
+			game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+			wait(1)
+			local player = game.Players.LocalPlayer
+			local success, error = pcall(function()
+			if player.leaderstats.Time.Value + 9223372036854774000 > 9223372036854775000 then
+				warn("mofo got too much L")
+			else
+			local args = {
+				[1] = "9223372036854774000",
+				[2] = "withdraw"
+			}
+ 
+			game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+			warn("Success")
+			end
+			end)
+		end
+	end
+    end,
+}
+
+Tab2:Textbox{
+	Name = "Custom Single Dupe",
+	Description = "dupes what you choose once.",
+	Callback = function(text) 
+	    local player = game.Players.LocalPlayer
+
+	if player.leaderstats.Time.Value + Text123 > 9223372036854775000 then
+		print('too much')
+	else
+		local args = {
+			[1] = Text123,
+			[2] = "withdraw"
+		}
+		game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+	end
+	end,
+}
+
+
+local MyDropdown = Tab2:Dropdown{
+	Name = "Custom Single Dupe",
+	StartingText = "sub to echofluwuff",
+	Description = "dupes what you choose once. (presets)",
+	Items = {
+		{"1Qn", 1},
+		{"2Qn", 1},
+		{"3Qn", 1},
+		{"4Qn", 1},
+		{"5Qn", 1},
+		{"6Qn", 1},
+		{"7Qn", 1},
+		{"8Qn", 1},
+		{"9Qn", 1},
+	},
+	Callback = function(item)
+	    local player = game.Players.LocalPlayer
+
+if player.leaderstats.Time.Value + with1 > 9223372036854775000 then
+	Flux:Notification("Sorry, that amount is too much. If you Dupe, you will be reset.", "Got it.")
+else
+	local args = {
+		[1] = with1,
+		[2] = "withdraw"
+	}
+	game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+	end
+	end,
+}
+
+Tab2:Button{
+	Name = "Auto Deposit",
+	Description = "Auto Deposits Time (Can't use while duping)",
+	Callback = function() 
+	    while true do
+		local player = game.Players.LocalPlayer
+		local leaderstats = player.leaderstats
+
+		if leaderstats.Time.Value >= 2500000000000000000 then
+			local args = {
+				[1] = "2000000000000000000",
+				[2] = "deposit"
+			}
+
+			game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+			print("Time is above 2.5 quintillion")
+		end
+
+		wait(0.5)
+	end
+	end,
+}
+
+Tab2:Textbox{
+	Name = "Time Value Changer",
+	Description = "instantly changes your time value.",
+	Callback = function(text) 
+	    local number = (text) 
+
+local player = game.Players.LocalPlayer
+	    local leaderstats = player.leaderstats
+	    local time = leaderstats.Time.Value
+	    	time = tostring(time)
+	    	local args = {
+	    		[1] = time,
+	    		[2] = "deposit"
+	    	}
+    
+	    	game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+	    	wait(0.1)
+	    	if time + number > 9223372036854775000 then
+	            local args = {
+	    		[1] = "1000",
+	    		[2] = "withdraw"
+	    	}
+ 
+	    	game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+            else
+	    	    local args = {
+	    		[1] = number,
+	    		[2] = "withdraw"
+	    	}
+ 
+	    	game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+	        end
+
+	end,
+}
+
+
+local Tab3 = GUI:Tab{
+	Name = "Extra-Features",
+	Icon = "http://www.roblox.com/asset/?id=11348555035"
+}
+
+Tab3:Textbox{
+	Name = "Withdraw (Portable ATM)",
+	Callback = function(with) 
+	    local player = game.Players.LocalPlayer
+ 
+		local success, error = pcall(function()
+			if player.leaderstats.Time.Value + with > 9223372036854775000 then
+				Flux:Notification("Sorry, that amount is too much. If you withdraw, you will be reset.", "epic")
+			else
+				local args = {
+					[1] = with,
+					[2] = "withdraw"
+				}
+				game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+			end
+		end)
+	end,
+}
+
+Tab3:Textbox{
+	Name = "Deposit (Portable ATM)",
+	Callback = function(dep) 
+	    local args = {
+			[1] = dep,
+			[2] = "deposit"
+		}
+ 
+		game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+	end,
+}
+
+
+Tab3:Textbox{
+	Name = "Change All Signs",
+	Description = "Must equip the signs.",
+	Callback = function(sign) 
+	    local Text = (sign)
+	getgenv().Auto = true
+	while task.wait() do
+		if getgenv().Auto and not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Z) then
+			for _,v in pairs(game:GetService("Players"):GetChildren()) do
+				pcall(function()
+					if v.Character:FindFirstChildWhichIsA("Tool") and getgenv().Auto then
+						v.Character:FindFirstChildWhichIsA("Tool").UpdateSign:FireServer(Text)
+					end
+				end)
+			end
+		else
+			break
+		end
+	end
+	end,
+}
+
+Tab3:Button{
+	Name = "Stop Changing Signs",
+	Description = "Stops changing the signs.",
+	Callback = function() 
+	    local Text = (sign)
+	getgenv().Auto = false
+	while task.wait() do
+		if getgenv().Auto and not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Z) then
+			for _,v in pairs(game:GetService("Players"):GetChildren()) do
+				pcall(function()
+					if v.Character:FindFirstChildWhichIsA("Tool") and getgenv().Auto then
+						v.Character:FindFirstChildWhichIsA("Tool").UpdateSign:FireServer(Text)
+					end
+				end)
+			end
+		else
+			break
+		end
+	end
+	end,
+}
+
+Tab3:Button{
+	Name = "Equip All Tools",
+	Description = "Equips everything in your backpack.",
+	Callback = function() 
+	    -
+	local player = game.Players.LocalPlayer
+	local backpack = player.Backpack
+ 
+	
+	for _, item in pairs(backpack:GetChildren()) do
+		
+		if item:IsA("Tool") and item:FindFirstChild("Handle") then
+			
+			item.Parent = player.Character
+			item.Handle.CanCollide = false
+			item.Handle.Anchored = false
+			item.Parent = player.Character
+			item:Activate()
+		end
+	end
+	end,
+}
+
+Tab3:Button{
+	Name = "Remove Inv Limit",
+	Description = "Removes the item limit (for trolle)",
+	Callback = function() 
+	    local workspace = game:GetService("Workspace")
+	local serverScriptService = game:GetService("ServerScriptService")
+	local localScriptName = "InventoryLimiter"
+	for _, localScript in ipairs(workspace:GetDescendants()) do
+		if localScript:IsA("LocalScript") and localScript.Name == localScriptName then
+			localScript:Destroy()
+		end
+	end
+	for _, localScript in ipairs(serverScriptService:GetDescendants()) do
+		if localScript:IsA("LocalScript") and localScript.Name == localScriptName then
+			localScript:Destroy()
+		end
+	end
+	end,
+}
+
+Tab3:Button{
+	Name = "Fill Up Inv",
+	Description = "fills your inventory with a lot of signs (use with Remove Inv Limit)",
+	Callback = function() 
+	    local args = {
+		[1] = 2,
+		[2] = 9222001000002002000
+	}
+ 
+	local replicatedStorage = game:GetService("ReplicatedStorage")
+	local remoteShop = replicatedStorage:WaitForChild("RemoteShop")
+ 
+	for i = 1, 32 do
+		remoteShop:FireServer(unpack(args))
+	end
+	end,
+}
+
+Tab3:Button{
+	Name = "Buy All Signs",
+	Description = "buys every sign (use with Remove Inv Limit)",
+	Callback = function() 
+	    local args = {
+		[1] = 0,
+		[2] = 3426103637302194000
+	}
+ 
+	game:GetService("ReplicatedStorage").RemoteShop:FireServer(unpack(args))
+ 
+	local args = {
+		[1] = 1,
+		[2] = 3426103637302194000
+	}
+ 
+	game:GetService("ReplicatedStorage").RemoteShop:FireServer(unpack(args))
+ 
+	local args = {
+		[1] = 2,
+		[2] = 3426103637302193700
+	}
+ 
+	game:GetService("ReplicatedStorage").RemoteShop:FireServer(unpack(args))
+ 
+	local args = {
+		[1] = 3,
+		[2] = 3426103637302192600
+	}
+ 
+	game:GetService("ReplicatedStorage").RemoteShop:FireServer(unpack(args))
+ 
+	local args = {
+		[1] = 4,
+		[2] = 3426103637302192000
+	}
+ 
+	game:GetService("ReplicatedStorage").RemoteShop:FireServer(unpack(args))
+ 
+	local args = {
+		[1] = 5,
+		[2] = 3426103637301192000
+	}
+ 
+	game:GetService("ReplicatedStorage").RemoteShop:FireServer(unpack(args))
+ 
+	local args = {
+		[1] = 6,
+		[2] = 3426103637301191700
+	}
+ 
+	game:GetService("ReplicatedStorage").RemoteShop:FireServer(unpack(args))
+	end,
+}
+
+Tab3:Button{
+	Name = "Remove Bad SFX",
+	Description = "removes ching sound, and the bad music",
+	Callback = function() 
+	    game:GetService("Workspace").Sound:Destroy()
+ 
+	local player = game.Players.LocalPlayer
+	if player then
+		local giveMoneyGui = player.PlayerGui:FindFirstChild("GiveMoneyGui")
+		if giveMoneyGui then
+			local submitScript = giveMoneyGui.MoneyFrame.Submit.LocalScript:FindFirstChild("ching")
+			if submitScript then submitScript:Destroy() end
+ 
+			local infoScript = giveMoneyGui.Info.LocalScript:FindFirstChild("ching")
+			if infoScript then infoScript:Destroy() end
+		end
+	end
+	end,
+}
+
+
+Tab3:Button{
+	Name = "Copy 9Qn",
+	Description = "copies the value 9qn to your clipboard",
+	Callback = function()
+	   setclipboard("9000000000000000000")
+	end,
+}
+
+Tab3:Button{
+	Name = "Sign Selfbot",
+	Description = "sign selfbot doesnt dupe | .help .givetime",
+	Callback = function()
+	   loadstring(game:HttpGet("https://raw.githubusercontent.com/echofluff/limited-time/main/limited%20time%20bots%20owo"))()
+	end,
+}
+
+Tab3:Button{
+	Name = "Delete Useless Tools",
+	Description = "deletes burger and sodaaa",
+	Callback = function() 
+	    local player = game.Players.LocalPlayer
+	local backpack = player.Backpack
+ 
+	for i, v in pairs(backpack:GetChildren()) do
+		if v.Name == "BloxyCola" or v.Name == "Cheezburger" then
+			v:Destroy()
+		end
+	end
+	end,
+}
+
+Tab3:Button{
+	Name = "Copy Time Value",
+	Description = "copies your exact time value",
+	Callback = function() 
+	    local player = game.Players.LocalPlayer
+	local leaderstats = player.leaderstats
+	local time = leaderstats.Time.Value
+	time = tostring(time) 
+	setclipboard(time)
+	end,
+}
+
+Tab3:Button{
+	Name = "Deposit / Void 1Qn",
+	Description = "Deposits or void's 1Qn. Idfk.",
+	Callback = function() 
+	    local args = {
+		[1] = "1000000000000000000",
+		[2] = "deposit"
+	}
+ 
+	game:GetService("ReplicatedStorage"):WaitForChild("ATMRemoteEvent"):FireServer(unpack(args))
+	end,
+}
+
+local character = game.Players.LocalPlayer.Character
+local humanoid = character:FindFirstChild("Humanoid")
+local isAutoFarming = false
+local teleportConnection = nil
+ 
+local function teleportToCoin()
+	local coins = {}
+	for i, v in pairs(game.Workspace:GetDescendants()) do
+		if v.Name == "Coin" then
+			table.insert(coins, v)
+		end
+	end
+ 
+	if #coins > 0 then
+		local coin = coins[math.random(#coins)]
+		character.HumanoidRootPart.CFrame = coin.CFrame
+	end
+end
+ 
+local function startAutoFarm()
+	isAutoFarming = true
+	teleportConnection = game:GetService("RunService").Heartbeat:Connect(function()
+		teleportToCoin()
+	end)
+end
+ 
+local function stopAutoFarm()
+	isAutoFarming = false
+	if teleportConnection then
+		teleportConnection:Disconnect()
+	end
+end
+
+
+Tab3:Toggle{
+	Name = "Toggle Orb Autofarm",
+	StartingState = false,
+	Description = "Autofarms the yellow orbs.",
+	Callback = function(state) 
+	    if state then
+		    startAutoFarm()
+	    else
+		    stopAutoFarm()
+	    end
+	end,
+}
+
+Tab3:Toggle{
+	Name = "Toggle Custom Sign Color (Not FE)",
+	StartingState = false,
+	Description = "Enables Sign Color Changer (Client)",
+	Callback = function(enable) 
+	    if enable then
+		_G.enabledo = true
+	else
+		_G.enabledo = false
+	end
+	end,
+}	
+Tab3:ColorPicker{
+    Name = "Custom Sign Color (Not FE)",
+	Style = Mercury.ColorPickerStyles.Legacy,
+	Callback = function(color) 
+	    if _G.enabledo then
+		local signPartColor = color
+		for _, part in pairs(workspace:GetDescendants()) do
+			if part.Name == "SignPart" then
+				part.Color = signPartColor
+			end
+		end
+	else
+		
+		for _, part in pairs(workspace:GetDescendants()) do
+			if part.Name == "SignPart" and part:FindFirstChild("OriginalColor") then
+				part.Color = part.OriginalColor.Value
+			end
+		end
+	end
+	end,
+}
+
+local Tab4 = GUI:Tab{
+	Name = "Teleport",
+	Icon = "http://www.roblox.com/asset/?id=6723742952"
+}
+
+Tab4:Button{
+	Name = "Teleport to ATM",
+	Description = nil,
+	Callback = function() 
+	    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(30.312623977661133, -52.073211669921875, -179.79150390625))
+	end,
+}
+
+Tab4:Button{
+	Name = "Teleport to Leaderboard",
+	Description = nil,
+	Callback = function()
+	    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(120.64704895019531, 8.399996757507324, -211.64414978027344))
+	end,
+}
+
+Tab4:Button{
+	Name = "Teleport To Sign Shop",
+	Description = nil,
+	Callback = function() 
+	    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(60.247291564941406, 4.799994945526123, -126.57831573486328))
+	end,
+}
+
+Tab4:Button{
+	Name = "Teleport To Spawn",
+	Description = nil,
+	Callback = function() 
+	    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(94.8828353881836, 3.599998712539673, -151.88279724121094))
+	end,
+}
+
+Tab4:Button{
+	Name = "Teleport to Bridges",
+	Description = nil,
+	Callback = function() 
+	    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(99.1268081665039, 3.999995708465576, -50.38357162475586))
+	end,
+}
+
+Tab4:Button{
+	Name = "Teleport To Portal",
+	Description = nil,
+	Callback = function() 
+	    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(9.96102237701416, 49.20000076293945, -108.40946197509766))
+	end,
+}
+
+Tab4:Button{
+	Name = "Teleport to Purple Island",
+	Description = nil,
+	Callback = function() 
+	    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(145.37844848632812, -382.6947326660156, -165.06532287597656))
+	end,
+}
+
+Tab4:Button{
+	Name = "Teleport To Moon",
+	Description = nil,
+	Callback = function() 
+	    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(245.78260803222656, 501.3309326171875, -744.0906982421875))
+	end,
+}
+
+local Tab5 = GUI:Tab{
+	Name = "Universal",
+	Icon = "http://www.roblox.com/asset/?id=10507357657"
+}
+
+Tab5:Button{
+	Name = "Chat Bypasser",
+	Description = "loads chat bypasser (not made by me)",
+	Callback = function() 
+	    loadstring(game:HttpGet(('https://raw.githubusercontent.com/vqmpjay/chatbypasser/main/chatbypasserv1'),true))()
+	end,
+}
+
+Tab5:Button{
+	Name = "Fates Admin",
+	Description = "loads fates admin (not made by me)",
+	Callback = function() 
+	    loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))();
+	end,
+}
+
+Tab5:Button{
+	Name = "Inf Yeild",
+	Description = "loads infinite yeild (not made by me)",
+	Callback = function() 
+	    loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+	end,
+}
+
+Tab5:Button{
+	Name = "Nullware V3",
+	Description = "loads nullware v3 (not made by me)",
+	Callback = function() 
+	    getgenv().MessageOnLoaded = false 
+	getgenv().Theme = "Purple" -- To change the UI Theme, set this to one of the following options: "Red", "Purple", "Blue", "Green", "Yellow"
+	loadstring(game:HttpGet("https://gist.githubusercontent.com/M6HqVBcddw2qaN4s/2d722888a388017c18028cd434c43a25/raw/dcccf1027fe4b90780e47767aaf584389c9d7771/EULma3fU90PUOKUn?identifier=".. (function()local a=""for b=1,256 do local c=math.random(1,3)a=a..string.char(c==1 and math.random(48,57)or c==2 and math.random(97,122)or c==3 and math.random(65,90))end;return a end)()))()
+	end,
+}
+
+Tab5:Button{
+	Name = "Pendulum Hub",
+	Description = "loads pendulum hub (not made by me)",
+	Callback = function() 
+	    loadstring(game:HttpGet("https://raw.githubusercontent.com/Tescalus/Pendulum-Hubs-Source/main/Pendulum%20Hub%20V5.lua"))()
+
+	end,
+}
+
+Tab5:Button{
+	Name = "Netless",
+	Description = "loads netless (not made by me)",
+	Callback = function() 
+	    for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
+		if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
+			game:GetService("RunService").Heartbeat:connect(function()
+				v.Velocity = Vector3.new(-30,0,0)
+			end)
+		end
+	end
+ 
+	game:GetService("StarterGui"):SetCore("SendNotification", { 
+		Title = "Notification";
+		Text = "Netless Ran";
+		Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
+	Duration = 16;
+	end,
+}
+
+Tab5:Button{
+	Name = "Mobile Keyboard",
+	Description = "loads a mobile keyboard script (not made by me)",
+	Callback = function() 
+	    loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+	end,
+}
